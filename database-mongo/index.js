@@ -12,9 +12,9 @@ db.once('open', function() {
 });
 
 var websiteSchema = mongoose.Schema({
-  website_url: String,
-  website_name: String,
-  website_rating: Number,
+  url: String,
+  name: String,
+  rating: Number,
   description: String
 });
 
