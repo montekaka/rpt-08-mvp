@@ -27,7 +27,8 @@ app.get('/api/websites', function (req, res) {
 app.post('/api/websites', function(req, res) {
 	//TODO search the db for the query website
 	// create a new one if can't find any match
-	console.log(req)
+  var url = req.body.url;  
+  res.send({website: url});
 });
 
 app.listen(3000, function() {

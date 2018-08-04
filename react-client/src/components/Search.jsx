@@ -18,15 +18,27 @@ class Search extends React.Component {
 	}
 
 	handleSubmit(event) {
-		console.log(this.state.searchKeyword);
+		var url = this.state.searchKeyword;
 		event.preventDefault();
+		$.ajax({
+			type: 'POST',
+			url: '/api/websites',
+			dataType: 'text',
+			data: JSON.stringify({url: url}),
+			contentType: 'application/json',  
+			success: (data) => {
+				console.log('success',data);
+			}, error: (err) => {
+				console.log('err', err);
+			}			
+		})
 	}
 
 	render(){
 		return (
 			<form onSubmit={this.handleSubmit}>
 				<label>Search Product
-					<input type="text" searchKeyword={this.state.searchKeyword} onChange={this.handleChange}/>							
+					<input type="text" value={this.state.searchKeyword} onChange={this.handleChange} />							
 				</label>
 				<input type="submit" value="Submit" />
 			</form>
