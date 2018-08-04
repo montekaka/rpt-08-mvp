@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var items = require('../database-mongo');
 
 var app = express();
+app.use(bodyParser.json());
 
 // UNCOMMENT FOR REACT
 app.use(express.static(__dirname + '/../react-client/dist'));
@@ -21,6 +22,12 @@ app.get('/api/websites', function (req, res) {
       res.json(data);
     }
   });
+});
+
+app.post('/api/websites', function(req, res) {
+	//TODO search the db for the query website
+	// create a new one if can't find any match
+	console.log(req)
 });
 
 app.listen(3000, function() {
