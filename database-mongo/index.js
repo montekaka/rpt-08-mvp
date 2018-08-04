@@ -11,19 +11,21 @@ db.once('open', function() {
   console.log('mongoose connected successfully');
 });
 
-var itemSchema = mongoose.Schema({
-  quantity: Number,
+var websiteSchema = mongoose.Schema({
+  website_url: String,
+  website_name: String,
+  website_rating: Number,
   description: String
 });
 
-var Item = mongoose.model('Item', itemSchema);
+var Website = mongoose.model('Website', websiteSchema);
 
 var selectAll = function(callback) {
-  Item.find({}, function(err, items) {
+  Website.find({}, function(err, websites) {
     if(err) {
       callback(err, null);
     } else {
-      callback(null, items);
+      callback(null, websites);
     }
   });
 };
