@@ -6,14 +6,14 @@ class WebsiteItem extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			website: []
+			website: props.website
 		}
 	}
 
 	render() {
 		return (
-			<div>Hello world</div>
-			)
+			<div>{this.state.website.url}</div>
+		)
 	}
 }
 

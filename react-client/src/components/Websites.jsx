@@ -11,11 +11,26 @@ class Websites extends React.Component {
 		}
 	}
 
+  componentDidMount() {
+    $.ajax({
+      url: '/api/websites', 
+      success: (data) => {
+        this.setState({
+          websites: data
+        })
+      },
+      error: (err) => {
+        console.log('err', err);
+      }
+    });
+  }
+
 	render(){
 		return (
 			<div>
+				<div>{this.state.websites.length}</div>
 				{
-					this.state.websites.map( website => <WebsiteItem website={website} key={website.name}></WebsiteItem>)
+					this.state.websites.map( website => <WebsiteItem website={website} key={website.url}></WebsiteItem>)
 				}	
 			</div>		
 		)

@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 // UNCOMMENT THE DATABASE YOU'D LIKE TO USE
 // var items = require('../database-mysql');
-var items = require('../database-mongo');
+var db = require('../database-mongo');
 
 var app = express();
 app.use(bodyParser.json());
@@ -15,7 +15,7 @@ app.use(express.static(__dirname + '/../react-client/dist'));
 // app.use(express.static(__dirname + '/../node_modules'));
 
 app.get('/api/websites', function (req, res) {
-  items.selectAll(function(err, data) {
+  db.selectAll(function(err, data) {
     if(err) {
       res.sendStatus(500);
     } else {
@@ -27,8 +27,13 @@ app.get('/api/websites', function (req, res) {
 app.post('/api/websites', function(req, res) {
 	//TODO search the db for the query website
 	// create a new one if can't find any match
-  var url = req.body.url;  
-  res.send({website: url});
+  var url = req.body.url;
+  db.createWebsite(url, (err, website)=>{
+    if(err){
+      res.sendStatus(500);
+    }
+    res.send({website: website});
+  })    
 });
 
 app.listen(3000, function() {

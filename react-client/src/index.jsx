@@ -13,25 +13,11 @@ class App extends React.Component {
     }
   }
 
-  componentDidMount() {
-    $.ajax({
-      url: '/api/websites', 
-      success: (data) => {
-        this.setState({
-          websites: data
-        })
-      },
-      error: (err) => {
-        console.log('err', err);
-      }
-    });
-  }
-
   render () {
     return (<div>
       <h1>Item List</h1>
       <Search></Search>
-      <Websites websites={this.state.websites}></Websites>
+      <Websites></Websites>
     </div>)
   }
 }

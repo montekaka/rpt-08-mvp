@@ -30,4 +30,15 @@ var selectAll = function(callback) {
   });
 };
 
+var createWebsite = function(url, callback) {
+  Website.create({url: url}, (err, website) => {
+    if(err) {
+      callback(err, null);
+    } else {
+      callback(null, website);
+    }
+  });
+}
+
 module.exports.selectAll = selectAll;
+module.exports.createWebsite = createWebsite;
