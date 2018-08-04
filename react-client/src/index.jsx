@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import List from './components/List.jsx';
+import Websites from './components/Websites.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class App extends React.Component {
 
   componentDidMount() {
     $.ajax({
-      url: '/websites', 
+      url: '/api/websites', 
       success: (data) => {
         this.setState({
           websites: data
@@ -28,7 +29,7 @@ class App extends React.Component {
   render () {
     return (<div>
       <h1>Item List</h1>
-      <List websites={this.state.websites}/>
+      <Websites websites={this.state.websites}></Websites>
     </div>)
   }
 }
