@@ -14,7 +14,7 @@ app.use(express.static(__dirname + '/../react-client/dist'));
 // app.use(express.static(__dirname + '/../angular-client'));
 // app.use(express.static(__dirname + '/../node_modules'));
 
-app.get('/api/websites', function (req, res) {
+app.get('/api/websites.json', function (req, res) {
   db.selectAll(function(err, data) {
     if(err) {
       res.sendStatus(500);
@@ -24,7 +24,7 @@ app.get('/api/websites', function (req, res) {
   });
 });
 
-app.post('/api/websites', function(req, res) {
+app.post('/api/websites.json', function(req, res) {
 	//TODO search the db for the query website
 	// create a new one if can't find any match
   var url = req.body.url;

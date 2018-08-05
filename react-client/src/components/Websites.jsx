@@ -13,7 +13,7 @@ class Websites extends React.Component {
 
   componentDidMount() {
     $.ajax({
-      url: '/api/websites', 
+      url: '/api/websites.json', 
       success: (data) => {
         this.setState({
           websites: data
