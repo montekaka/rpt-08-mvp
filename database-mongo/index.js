@@ -40,5 +40,16 @@ var createWebsite = function(url, callback) {
   });
 }
 
+var findWebsite = function(id, callback) {
+  Website.findOne({_id: id}, (err, website) => {
+    if(err) {
+      callback(err, null);
+    } else {
+      callback(null, website);
+    }
+  });
+}
+
 module.exports.selectAll = selectAll;
 module.exports.createWebsite = createWebsite;
+module.exports.findWebsite = findWebsite;

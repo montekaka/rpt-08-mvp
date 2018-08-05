@@ -36,6 +36,16 @@ app.post('/api/websites.json', function(req, res) {
   })    
 });
 
+app.post('/api/website.json', function(req, res) {
+  var _id = req.body._id;
+  db.findWebsite(_id, (err, website) => {
+    if(err) {
+      res.sendStatus(500);
+    }
+    res.send({website: website});
+  });
+})
+
 app.listen(3000, function() {
   console.log('listening on port 3000!');
 });
