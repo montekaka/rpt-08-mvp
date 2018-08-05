@@ -9,7 +9,7 @@ class WebsiteItem extends React.Component {
 		super(props);
 		this.state = {
 			website: props.website,
-			linkTo: '/websites/'+props.website.url
+			linkTo: '/websites/'+props.website._id
 		}
 	}
 

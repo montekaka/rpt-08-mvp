@@ -6,13 +6,20 @@ class Website extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			website: ''
+			website: '',
+			_id: ''
 		}
+	}
+
+	componentDidMount() {
+		var _id = this.props.match.params._id;
+		
+		this.setState({_id: _id});
 	}
 
 	render() {
 		return (
-			<div>Hello World</div>
+			<div>Hello World {this.state._id}</div>
 		)
 	}
 }
