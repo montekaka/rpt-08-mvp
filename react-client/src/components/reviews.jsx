@@ -7,13 +7,20 @@ class Reviews extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
+			website: props.website,
 			reviews: ''
 		}
 	}
 
+	componentWillReceiveProps(nextProps) {
+	  this.setState({ website: nextProps.website });  
+	}
+
 	render() {
 		return(
-			<ReviewNew></ReviewNew>
+			<div>
+				<ReviewNew website={this.state.website}></ReviewNew>
+			</div>
 		)
 	}
 

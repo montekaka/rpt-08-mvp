@@ -6,15 +6,19 @@ class ReviewNew extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
+			website: '',
 			review: '',
 			rating: 0,
 			text: '',
-			screenname: '',
-			_websiteId: ''
+			screenname: ''
 		}
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);		
 	}
+
+	componentWillReceiveProps(nextProps) {
+	  this.setState({ website: nextProps.website });  
+	}	
 
 	handleChange(event){
 		this.setState({text: event.target.value});
@@ -23,6 +27,7 @@ class ReviewNew extends React.Component {
 	handleSubmit(event){
 		var text = this.state.text;
 		var review = {text: text}
+		console.log('website...',this.state.website);
 		event.preventDefault();
 		$.ajax({
 			type: "POST",
@@ -41,11 +46,13 @@ class ReviewNew extends React.Component {
 
 	render() {
 		return (
-			<form onSubmit={this.handleSubmit}>
-				<label>Write your review</label>
-				<input type="text" value= {this.state.text} onChange={this.handleChange} />							
-				<input type="submit" value="Submit" />
-			</form>
+			<div>
+				<form onSubmit={this.handleSubmit}>
+					<label>Write your review</label>
+					<input type="text" value= {this.state.text} onChange={this.handleChange} />							
+					<input type="submit" value="Submit" />
+				</form>
+			</div>
 		)
 	}
 }
