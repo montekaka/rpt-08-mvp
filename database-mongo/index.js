@@ -83,3 +83,4 @@ var createReview = function(review, callback) {
 module.exports.selectAll = selectAll;
 module.exports.createWebsite = createWebsite;
 module.exports.findWebsite = findWebsite;
+module.exports.createReview = createReview;

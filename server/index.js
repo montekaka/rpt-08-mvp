@@ -44,7 +44,19 @@ app.post('/api/website.json', function(req, res) {
     }
     res.send({website: website});
   });
-})
+});
+
+// reviews
+
+app.post('/api/reviews.json', (req, res) => {
+  var review = req.body.review;
+  db.createReview(review, (err, review) => {
+    if(err) {
+      res.sendStatus(500);
+    }
+    res.send({review: review});
+  })
+});
 
 app.listen(3000, function() {
   console.log('listening on port 3000!');
