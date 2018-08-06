@@ -9,7 +9,8 @@ class ReviewNew extends React.Component {
 			review: '',
 			rating: 0,
 			text: '',
-			screenname: ''
+			screenname: '',
+			_websiteId: ''
 		}
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);		
@@ -21,8 +22,21 @@ class ReviewNew extends React.Component {
 
 	handleSubmit(event){
 		var text = this.state.text;
+		var review = {text: text}
 		event.preventDefault();
-		console.log(text);
+		$.ajax({
+			type: "POST",
+			url: '/api/reviews.json',
+			dataType: 'text',
+			data: JSON.stringify({review: review}),
+			contentType: 'application/json', 
+			success: (data) => {
+				console.log('success', data);
+			},
+			error: (err) => {
+				console.log('err', err);
+			}
+		});
 	}
 
 	render() {
