@@ -7,7 +7,7 @@ class ReviewNew extends React.Component {
 		super(props);
 		this.state = {
 			review: '',
-			stars: 0,
+			rating: 0,
 			text: '',
 			screenname: ''
 		}
@@ -15,17 +15,23 @@ class ReviewNew extends React.Component {
 		this.handleSubmit = this.handleSubmit.bind(this);		
 	}
 
-	handleChange(){
-
+	handleChange(event){
+		this.setState({text: event.target.value});
 	}
 
-	handleSubmit(){
-
+	handleSubmit(event){
+		var text = this.state.text;
+		event.preventDefault();
+		console.log(text);
 	}
 
 	render() {
 		return (
-			<div>Hello world</div>
+			<form onSubmit={this.handleSubmit}>
+				<label>Write your review</label>
+				<input type="text" value= {this.state.text} onChange={this.handleChange} />							
+				<input type="submit" value="Submit" />
+			</form>
 		)
 	}
 }

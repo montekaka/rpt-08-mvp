@@ -1,24 +1,44 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/yelpsaas');
+var promise = mongoose.connect('mongodb://localhost/yelpsaas', {
+  useMongoClient: true
+});
 
-var db = mongoose.connection;
-
-db.on('error', function() {
+promise.then((db) => {
+  console.log('woohoo mongoose connected successfully');
+}).catch((err) => {
   console.log('mongoose connection error');
 });
 
-db.once('open', function() {
-  console.log('mongoose connected successfully');
-});
+var Schema = mongoose.Schema;
+var db = mongoose.connection;
+
+// db.on('error', function() {
+//   console.log('mongoose connection error');
+// });
+
+// db.once('open', function() {
+//   console.log('mongoose connected successfully');
+// });
 
 var websiteSchema = mongoose.Schema({
   url: String,
   name: String,
   rating: Number,
-  description: String
+  description: String,
+  reviews: [{ type: Schema.Types.ObjectId, ref: 'Review' }]
 });
 
+var reviewSchema = mongoose.Schema({
+  website: { type: Schema.Types.ObjectId, ref: 'Website' },
+  text: String,
+  rating: Number,
+  screenname: String,
+  createdDate: Date,
+  updatedDate: Date
+})
+
 var Website = mongoose.model('Website', websiteSchema);
+var Review = mongoose.model('Review', reviewSchema);
 
 var selectAll = function(callback) {
   Website.find({}, function(err, websites) {

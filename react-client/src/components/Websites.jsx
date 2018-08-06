@@ -30,7 +30,7 @@ class Websites extends React.Component {
 			<div>
 				<div>{this.state.websites.length}</div>
 				{
-					this.state.websites.map( website => <WebsiteItem website={website} key={website.url}></WebsiteItem>)
+					this.state.websites.map( website => <WebsiteItem website={website} key={'website'+website._id}></WebsiteItem>)
 				}	
 			</div>		
 		)
