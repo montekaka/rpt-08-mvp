@@ -70,6 +70,16 @@ var findWebsite = function(id, callback) {
   });
 }
 
+var createReview = function(review, callback) {
+  Review.create(review, (err, review) => {
+    if(err) {
+      callback(err, null);
+    } else {
+      callback(null, review);
+    }
+  });
+}
+
 module.exports.selectAll = selectAll;
 module.exports.createWebsite = createWebsite;
 module.exports.findWebsite = findWebsite;
