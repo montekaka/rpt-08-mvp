@@ -30,7 +30,7 @@ class ReviewNew extends React.Component {
 		event.preventDefault();
 		$.ajax({
 			type: "POST",
-			url: '/api/reviews.json',
+			url: '/api/reviews/new',
 			dataType: 'text',
 			data: JSON.stringify({review: review}),
 			contentType: 'application/json', 

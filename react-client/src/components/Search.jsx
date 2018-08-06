@@ -22,7 +22,7 @@ class Search extends React.Component {
 		event.preventDefault();
 		$.ajax({
 			type: 'POST',
-			url: '/api/websites.json',
+			url: '/api/websites/new',
 			dataType: 'text',
 			data: JSON.stringify({url: url}),
 			contentType: 'application/json',  

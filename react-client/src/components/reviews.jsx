@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import ReviewNew from './ReviewNew.jsx';
+import ReviewItem from './ReviewItem.jsx'
 
 class Reviews extends React.Component {
 	constructor(props){
@@ -12,6 +13,10 @@ class Reviews extends React.Component {
 		}
 	}
 
+	componentDidMount() {
+		
+	}
+
 	componentWillReceiveProps(nextProps) {
 	  this.setState({ website: nextProps.website });  
 	}
@@ -20,6 +25,7 @@ class Reviews extends React.Component {
 		return(
 			<div>
 				<ReviewNew website={this.state.website}></ReviewNew>
+				<ReviewItem></ReviewItem>
 			</div>
 		)
 	}

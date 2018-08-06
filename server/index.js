@@ -24,7 +24,7 @@ app.get('/api/websites.json', function (req, res) {
   });
 });
 
-app.post('/api/websites.json', function(req, res) {
+app.post('/api/websites/new', function(req, res) {
 	//TODO search the db for the query website
 	// create a new one if can't find any match
   var url = req.body.url;
@@ -48,15 +48,19 @@ app.post('/api/website.json', function(req, res) {
 
 // reviews
 
-app.post('/api/reviews.json', (req, res) => {
+app.post('/api/reviews/new', (req, res) => {
   var review = req.body.review;
-  console.log('saving', review);
   db.createReview(review, (err, review) => {
     if(err) {
       res.sendStatus(500);
     }
     res.send({review: review});
   })
+});
+
+// get review by website
+app.post('/api/reviews.json', (req, res) => {
+
 });
 
 app.listen(3000, function() {
