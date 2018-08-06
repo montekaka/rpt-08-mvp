@@ -33,6 +33,8 @@ var reviewSchema = mongoose.Schema({
   text: String,
   rating: Number,
   screenname: String,
+  upvote: Number,
+  downvote: Number,
   createdDate: Date,
   updatedDate: Date
 })
