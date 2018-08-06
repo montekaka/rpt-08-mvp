@@ -13,12 +13,21 @@ class Reviews extends React.Component {
 		}
 	}
 
-	componentDidMount() {
-		
-	}
-
 	componentWillReceiveProps(nextProps) {
-	  this.setState({ website: nextProps.website });  
+	  this.setState({ website: nextProps.website }); 
+	  // get reviews 
+		$.ajax({
+			type: 'POST',
+			url: '/api/website/reviews.json',
+			dataType: 'text',
+			data: JSON.stringify({websiteId: nextProps.website._id}),
+			contentType: 'application/json',  
+			success: (data) => {
+				console.log('success',data);
+			}, error: (err) => {
+				console.log('err', err);
+			}			
+		})	  
 	}
 
 	render() {

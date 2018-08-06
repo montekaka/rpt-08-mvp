@@ -82,7 +82,18 @@ var createReview = function(review, callback) {
   });
 }
 
+var getWebsiteReviews = function(websiteId, callback) {
+  Review.find({website: websiteId}, (err, reviews) => {
+    if(err) {
+      callback(err, null);
+    } else {
+      callback(null, reviews);
+    }
+  })
+}
+
 module.exports.selectAll = selectAll;
 module.exports.createWebsite = createWebsite;
 module.exports.findWebsite = findWebsite;
 module.exports.createReview = createReview;
+module.exports.getWebsiteReviews = getWebsiteReviews;

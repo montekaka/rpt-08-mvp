@@ -36,6 +36,7 @@ app.post('/api/websites/new', function(req, res) {
   })    
 });
 
+// TODO change this one to use para get
 app.post('/api/website.json', function(req, res) {
   var _id = req.body._id;
   db.findWebsite(_id, (err, website) => {
@@ -47,7 +48,6 @@ app.post('/api/website.json', function(req, res) {
 });
 
 // reviews
-
 app.post('/api/reviews/new', (req, res) => {
   var review = req.body.review;
   db.createReview(review, (err, review) => {
@@ -59,8 +59,10 @@ app.post('/api/reviews/new', (req, res) => {
 });
 
 // get review by website
-app.post('/api/reviews.json', (req, res) => {
-
+// TODO change this one to use para get
+app.post('/api/website/reviews.json', (req, res) => {
+  var websiteId = req.body.websiteId;
+  console.log('looking up reviews for',websiteId);
 });
 
 app.listen(3000, function() {
