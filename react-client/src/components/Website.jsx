@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
+import Reviews from './reviews.jsx';
 
 class Website extends React.Component {
 	constructor(props){
@@ -35,7 +36,10 @@ class Website extends React.Component {
 
 	render() {
 		return (
-			<div>Welcome to {this.state.website.url}</div>
+			<div>
+				<div>Welcome to {this.state.website.url}</div>
+				<Reviews></Reviews>
+			</div>
 		)
 	}
 }
