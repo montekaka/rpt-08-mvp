@@ -14,7 +14,6 @@ class Website extends React.Component {
 	componentDidMount() {
 		var _id = this.props.match.params._id;
 		this.setPage(_id, (data) => {
-			console.log(data)
 			this.setState(data);
 		});
 		//this.setState({_id: _id});

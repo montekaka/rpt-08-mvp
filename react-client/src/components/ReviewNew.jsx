@@ -26,8 +26,7 @@ class ReviewNew extends React.Component {
 
 	handleSubmit(event){
 		var text = this.state.text;
-		var review = {text: text}
-		console.log('website...',this.state.website);
+		var review = {text: text, website: this.state.website._id}		
 		event.preventDefault();
 		$.ajax({
 			type: "POST",
