@@ -62,7 +62,12 @@ app.post('/api/reviews/new', (req, res) => {
 // TODO change this one to use para get
 app.post('/api/website/reviews.json', (req, res) => {
   var websiteId = req.body.websiteId;
-  console.log('looking up reviews for',websiteId);
+  db.getWebsiteReviews(websiteId, (err, reviews) => {
+    if(err) {
+      res.sendStatus(500);
+    }
+    res.json(reviews);
+  });  
 });
 
 app.listen(3000, function() {
