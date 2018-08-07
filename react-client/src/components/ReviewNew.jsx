@@ -26,6 +26,7 @@ class ReviewNew extends React.Component {
 
 	handleSubmit(event){
 		var text = this.state.text;
+		var handleNewReview = this.props.handleNewReview;
 		var review = {text: text, website: this.state.website._id}		
 		event.preventDefault();
 		$.ajax({
@@ -36,6 +37,7 @@ class ReviewNew extends React.Component {
 			contentType: 'application/json', 
 			success: (data) => {
 				console.log('success', data);
+				handleNewReview(data);
 			},
 			error: (err) => {
 				console.log('err', err);

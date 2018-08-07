@@ -11,6 +11,8 @@ class Reviews extends React.Component {
 			website: props.website,
 			reviews: []
 		}
+
+		this.handleNewReview = this.handleNewReview.bind(this);
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -31,10 +33,16 @@ class Reviews extends React.Component {
 		})	  
 	}
 
+	handleNewReview(review) {		
+		var reviews = this.state.reviews;
+		reviews.unshift(JSON.parse(review).review);
+		this.setState({reviews: reviews});
+	}
+
 	render() {
 		return(
 			<div>
-				<ReviewNew website={this.state.website}></ReviewNew>
+				<ReviewNew website={this.state.website} handleNewReview = {this.handleNewReview}></ReviewNew>
 				{					
 					this.state.reviews.map((review) => <ReviewItem review={review} key={review._id}></ReviewItem>)					
 				}				
