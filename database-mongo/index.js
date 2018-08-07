@@ -64,7 +64,6 @@ var selectAll = function(callback) {
 var createWebsite = function(url, callback) {
   Website.create({url: url}, (err, website) => {
     if(err) {
-      console.log('db', err);
       callback(err, null);
     } else {
       callback(null, website);

@@ -27,8 +27,7 @@ app.get('/api/websites.json', function (req, res) {
 app.post('/api/websites/new', function(req, res) {
 	//TODO search the db for the query website
 	// create a new one if can't find any match
-  var url = req.body.url;
-   
+  var url = req.body.url; 
   db.findWebsiteByURL(url, (err, website) => {
     if(err) {
       res.sendStatus(500);

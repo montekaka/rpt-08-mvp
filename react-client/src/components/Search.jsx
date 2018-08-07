@@ -27,7 +27,8 @@ class Search extends React.Component {
 			data: JSON.stringify({url: url}),
 			contentType: 'application/json',  
 			success: (data) => {
-				console.log('success',data);
+				var website = JSON.parse(data).website;
+				this.props.history.push('/websites/'+website._id);
 			}, error: (err) => {
 				console.log('err', err);
 			}			
