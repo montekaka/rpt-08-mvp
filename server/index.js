@@ -28,12 +28,22 @@ app.post('/api/websites/new', function(req, res) {
 	//TODO search the db for the query website
 	// create a new one if can't find any match
   var url = req.body.url;
-  db.createWebsite(url, (err, website)=>{
-    if(err){
+  db.findWebsiteByURL(url, (err, website) => {
+    if(err) {
       res.sendStatus(500);
+    } else if (website === null) {      
+      db.createWebsite(url, (err, website)=>{
+        if(err){
+          res.sendStatus(500);
+        }
+        res.send({website: website});
+      })       
+    } else {
+      res.send({website: website});
     }
-    res.send({website: website});
-  })    
+  });
+
+   
 });
 
 // TODO change this one to use para get

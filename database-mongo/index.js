@@ -52,10 +52,21 @@ var selectAll = function(callback) {
   });
 };
 
+// before we are creating the website, check and see if the website has been added
 var createWebsite = function(url, callback) {
   Website.create({url: url}, (err, website) => {
     if(err) {
       callback(err, null);
+    } else {
+      callback(null, website);
+    }
+  });
+}
+
+var findWebsiteByURL = function(url, callback) {
+  Website.findOne({url: url}, (err, website) => {
+    if(err) {
+      callback(err, null); 
     } else {
       callback(null, website);
     }
@@ -97,3 +108,4 @@ module.exports.createWebsite = createWebsite;
 module.exports.findWebsite = findWebsite;
 module.exports.createReview = createReview;
 module.exports.getWebsiteReviews = getWebsiteReviews;
+module.exports.findWebsiteByURL = findWebsiteByURL;
