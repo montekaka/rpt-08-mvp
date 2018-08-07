@@ -21,11 +21,19 @@ var db = mongoose.connection;
 // });
 
 var websiteSchema = mongoose.Schema({
-  url: String,
+  url: {type: String, unique: true},
   name: String,
   rating: Number,
   description: String,
   reviews: [{ type: Schema.Types.ObjectId, ref: 'Review' }]
+});
+
+websiteSchema.post('save', (error, doc, next) => {
+  if(error.name === 'MongoError' && error.code === 11000) {
+    next(new Error('There was a duplicate key error'));
+  } else {
+    next(error);
+  }
 });
 
 var reviewSchema = mongoose.Schema({
@@ -56,6 +64,7 @@ var selectAll = function(callback) {
 var createWebsite = function(url, callback) {
   Website.create({url: url}, (err, website) => {
     if(err) {
+      console.log('db', err);
       callback(err, null);
     } else {
       callback(null, website);
