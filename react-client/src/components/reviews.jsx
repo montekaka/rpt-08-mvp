@@ -9,7 +9,7 @@ class Reviews extends React.Component {
 		super(props);
 		this.state = {
 			website: props.website,
-			reviews: ''
+			reviews: []
 		}
 	}
 
@@ -23,7 +23,8 @@ class Reviews extends React.Component {
 			data: JSON.stringify({websiteId: nextProps.website._id}),
 			contentType: 'application/json',  
 			success: (data) => {
-				console.log('success',data);
+				console.log('success', JSON.parse(data));
+				this.setState({reviews: JSON.parse(data)});
 			}, error: (err) => {
 				console.log('err', err);
 			}			
@@ -34,7 +35,9 @@ class Reviews extends React.Component {
 		return(
 			<div>
 				<ReviewNew website={this.state.website}></ReviewNew>
-				<ReviewItem></ReviewItem>
+				{					
+					this.state.reviews.map((review) => <ReviewItem review={review} key={review._id}></ReviewItem>)					
+				}				
 			</div>
 		)
 	}

@@ -6,14 +6,14 @@ class ReviewItem extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			review: ''
+			review: props.review
 		}	
 	}	
-
+	
 	render() {
 		return (
 			<div>
-				hello world
+				{this.state.review.text}
 			</div>
 		)
 	}
