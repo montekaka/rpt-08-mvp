@@ -45,10 +45,27 @@ var reviewSchema = mongoose.Schema({
   downvote: Number,
   createdDate: Date,
   updatedDate: Date
-})
+});
+
+var userSchema = mongoose.Schema({
+  email: {type: String, unique: true, required: true, trim: true}
+  username: {type: String, unique: true, required: true, trim: true},
+  password: {type: String, required: true},
+  passwordConf: {type: String, required: true},
+});
+
+
+userSchema.post('save', (error, doc, next) => {
+  if(error.name === 'MongoError' && error.code === 11000) {
+    next(new Error('There was a duplicate key error'));
+  } else {
+    next(error);
+  }
+});
 
 var Website = mongoose.model('Website', websiteSchema);
 var Review = mongoose.model('Review', reviewSchema);
+var User = mongoose.model('User', userSchema);
 
 var selectAll = function(callback) {
   Website.find({}, function(err, websites) {
@@ -109,6 +126,17 @@ var getWebsiteReviews = function(websiteId, callback) {
       callback(null, reviews);
     }
   })
+}
+
+var createUser = function(user) {
+  User.create(user, (err, user) => {
+    if(err) {
+      // callback(err, null);
+      return next(err);
+    } else {
+      callback(null, user);
+    }
+  });
 }
 
 module.exports.selectAll = selectAll;
