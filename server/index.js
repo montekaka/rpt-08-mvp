@@ -42,8 +42,6 @@ app.post('/api/websites/new', function(req, res) {
       res.send({website: website});
     }
   });
-
-   
 });
 
 // TODO change this one to use para get
@@ -78,6 +76,18 @@ app.post('/api/website/reviews.json', (req, res) => {
     }
     res.json(reviews);
   });  
+});
+
+// User auth
+app.post('/api/users/signup', (req, res) => {
+  var user = req.body.user;
+  db.createUser(user, (err, user) => {
+    console.log(err, user)
+    if(err) {
+      res.sendStatus(500);
+    }
+    res.send({user: user});
+  })
 });
 
 app.listen(3000, function() {

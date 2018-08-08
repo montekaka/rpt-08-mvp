@@ -48,10 +48,10 @@ var reviewSchema = mongoose.Schema({
 });
 
 var userSchema = mongoose.Schema({
-  email: {type: String, unique: true, required: true, trim: true}
-  username: {type: String, unique: true, required: true, trim: true},
-  password: {type: String, required: true},
-  passwordConf: {type: String, required: true},
+  username: {type: String, unique: true, required: true, trim: true}
+  // email: {type: String, unique: true, required: true, trim: true},
+  // password: {type: String, required: true},
+  // passwordConf: {type: String, required: true}
 });
 
 
@@ -128,11 +128,11 @@ var getWebsiteReviews = function(websiteId, callback) {
   })
 }
 
-var createUser = function(user) {
-  User.create(user, (err, user) => {
+var createUser = function(user, callback) {
+  User.create(user, (err, user) => {    
     if(err) {
       // callback(err, null);
-      return next(err);
+      callback(err, null);
     } else {
       callback(null, user);
     }
@@ -145,3 +145,4 @@ module.exports.findWebsite = findWebsite;
 module.exports.createReview = createReview;
 module.exports.getWebsiteReviews = getWebsiteReviews;
 module.exports.findWebsiteByURL = findWebsiteByURL;
+module.exports.createUser = createUser;

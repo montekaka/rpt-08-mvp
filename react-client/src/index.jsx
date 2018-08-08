@@ -16,11 +16,28 @@ class App extends React.Component {
     }
   }
 
+  signUp() {
+    $.ajax({
+      type: 'POST',
+      url: '/api/users/signup',
+      dataType: 'text',
+      data: JSON.stringify({user: {username: 'kkkk'}}),
+      contentType: 'application/json',
+      success: (data) => {
+        var user = JSON.parse(data).user;
+        console.log(user);
+      }, error: (err) => {
+        console.log('err', err)
+      }
+    })
+  }
+
   render () {
     return (
       <Router>
         <div>
-          <h1>Item List</h1>
+          <h1>Item List</h1> 
+          <div onClick={this.signUp} >Sign Up</div>         
           <Route exact path="/" component={Search} ></Route>
           <Route exact path="/" component={Websites} ></Route>
           <Route path="/websites/:_id" component={Website} />     
