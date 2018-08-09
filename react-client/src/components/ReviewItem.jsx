@@ -13,8 +13,8 @@ class ReviewItem extends React.Component {
 	render() {
 		return (
 			<div className="blog-post">
-			 	<h2 className="blog-post-title">user name</h2>
-			 	<div>Stars</div>
+			 	<h2 className="blog-post-title">{this.state.review.screenname}</h2>
+			 	<div>{this.state.review.rating} Stars</div>
 			 	<p className="blog-post-meta">January 1, 2014</p>			 	 
 			 	<p>{this.state.review.text}</p>			
 			</div>

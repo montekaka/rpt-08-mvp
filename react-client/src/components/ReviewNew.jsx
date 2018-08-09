@@ -12,7 +12,9 @@ class ReviewNew extends React.Component {
 			text: '',
 			screenname: ''
 		}
-		this.handleChange = this.handleChange.bind(this);
+		this.handleChange = this.handleChange.bind(this);		
+		this.handleUserNameChange = this.handleUserNameChange.bind(this);		
+		this.handleRatingChange = this.handleRatingChange.bind(this);		
 		this.handleSubmit = this.handleSubmit.bind(this);		
 	}
 
@@ -24,10 +26,18 @@ class ReviewNew extends React.Component {
 		this.setState({text: event.target.value});
 	}
 
+	handleUserNameChange(event){
+		this.setState({screenname: event.target.value});
+	}	
+
+	handleRatingChange(event){
+		this.setState({rating: event.target.value});
+	}	
+
 	handleSubmit(event){
 		var text = this.state.text;
 		var handleNewReview = this.props.handleNewReview;
-		var review = {text: text, website: this.state.website._id}		
+		var review = {text: text, website: this.state.website._id, rating: this.state.rating, screenname: this.state.screenname}		
 		event.preventDefault();
 		$.ajax({
 			type: "POST",
@@ -48,10 +58,21 @@ class ReviewNew extends React.Component {
 	render() {
 		return (
 			<div className="col-md-4">
+				<h4 className="font-italic">Submit your review</h4>
 				<form onSubmit={this.handleSubmit}>
-					<label>Write your review</label>
-					<input type="text" value= {this.state.text} onChange={this.handleChange} />							
-					<input type="submit" value="Submit" />
+					<div className="form-group">
+					 	<label>Username</label>
+						<input type="text" className="form-control" value= {this.state.screenname} onChange={this.handleUserNameChange} />							
+					</div>
+					<div className="form-group">
+					 	<label>Stars</label>
+						<input type="number" className="form-control" value= {this.state.rating} onChange={this.handleRatingChange} />
+					</div>	
+					<div className="form-group">
+					 	<label>Review</label>
+						<textarea type="text" className="form-control" value= {this.state.text} onChange={this.handleChange} rows="3"></textarea>							
+					</div>															
+					<input type="submit" value="Submit" className="btn btn-primary"/>
 				</form>
 			</div>
 		)
