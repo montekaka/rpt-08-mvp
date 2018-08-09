@@ -36,10 +36,16 @@ class Website extends React.Component {
 
 	render() {
 		return (
-			<div>
-				<div>Welcome to {this.state.website.url}</div>
+			<span>
+	      <div className="jumbotron">
+					<div className="container">
+						<h1 className="display-3">{this.state.website.url}</h1>
+						<p>TOTAL REVIEWS</p>
+						<p>STARS</p>
+					</div>
+	      </div>			
 				<Reviews website={this.state.website}></Reviews>
-			</div>
+			</span>
 		)
 	}
 }

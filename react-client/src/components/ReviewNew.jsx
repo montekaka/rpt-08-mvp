@@ -47,7 +47,7 @@ class ReviewNew extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<div className="col-md-4">
 				<form onSubmit={this.handleSubmit}>
 					<label>Write your review</label>
 					<input type="text" value= {this.state.text} onChange={this.handleChange} />							

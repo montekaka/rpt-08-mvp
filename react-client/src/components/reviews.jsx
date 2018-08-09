@@ -41,12 +41,19 @@ class Reviews extends React.Component {
 
 	render() {
 		return(
-			<div>
-				<ReviewNew website={this.state.website} handleNewReview = {this.handleNewReview}></ReviewNew>
-				{					
-					this.state.reviews.map((review) => <ReviewItem review={review} key={review._id}></ReviewItem>)					
-				}				
-			</div>
+			<main role="main" className="container">
+				<div className="row">
+					<div className="col-md-8 blog-main">
+						<h3 className="pb-3 mb-4 font-italic border-bottom">
+	            Reviews
+	          </h3>					
+						{					
+							this.state.reviews.map((review) => <ReviewItem review={review} key={review._id}></ReviewItem>)					
+						}								
+					</div>		
+					<ReviewNew website={this.state.website} handleNewReview = {this.handleNewReview}></ReviewNew>
+				</div>			
+			</main>
 		)
 	}
 
