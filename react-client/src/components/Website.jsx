@@ -19,12 +19,20 @@ class Website extends React.Component {
 		//this.setState({_id: _id});
 	}
 
+	componentWillReceiveProps(newProps) {
+		var _id = newProps.match.params._id;
+		this.setPage(_id, (data) => {
+			this.setState(data);
+		});		
+	}
+
 	setPage(id, callback){
 		var baseUrl = '/api/websites/'+id+'.json';
 		$.ajax({
 			url: baseUrl,
 			success: (data) => {
 				//callback(JSON.parse(data))
+				console.log(data)
 				callback(data);
 			}, error: (err) => {
 				console.log('err', err)
@@ -37,7 +45,7 @@ class Website extends React.Component {
 			<span>
 	      <div className="jumbotron">
 					<div className="container">
-						<h1 className="display-3">{this.state.website.url}</h1>
+						<h1 className="display-3">{this.state.website.name}</h1>
 						<p>TOTAL REVIEWS</p>
 						<p>STARS</p>
 					</div>

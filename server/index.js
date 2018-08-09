@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 // UNCOMMENT THE DATABASE YOU'D LIKE TO USE
 // var items = require('../database-mysql');
 var db = require('../database-mongo');
+var libs = require('../libs');
 
 var app = express();
 app.use(bodyParser.json());
@@ -31,19 +32,21 @@ app.post('/api/websites/new', function(req, res) {
   db.findWebsiteByURL(url, (err, website) => {
     if(err) {
       res.sendStatus(500);
-    } else if (website === null) {      
-      db.createWebsite(url, (err, website)=>{
-        if(err){
-          res.send({error: err.message});
-        }
-        //res.send({website: website});
-        console.log('start redirect the new page', '/websites/'+website._id)
-        res.redirect('/websites/'+website._id);
-      })       
+    } else if (website === null) {
+      libs.promiseScrape(url).then((data) => {
+        db.createWebsite(data, (err, website) =>{
+          if(err){
+            res.send({error: err.message});
+          }
+          res.send({websiteId: website._id});
+          // console.log('start redirect the new page', '/websites/'+website._id)
+          // res.redirect('/websites/'+website._id);
+        })  
+      })     
     } else {
-      console.log('start redirect to page', '/websites/'+website._id)
-      res.status(200)
-      res.redirect('/websites/'+website._id);
+      // console.log('start redirect to page', '/websites/'+website._id)
+      // res.redirect('/websites/'+website._id);
+      res.send({websiteId: website._id});
     }
   });
 });

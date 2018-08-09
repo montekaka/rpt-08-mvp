@@ -24,6 +24,7 @@ var db = mongoose.connection;
 
 var websiteSchema = mongoose.Schema({
   url: {type: String, unique: true},
+  imageUrl: String,
   name: String,
   rating: Number,
   description: String,
@@ -92,12 +93,13 @@ var selectAll = function(callback) {
 };
 
 // before we are creating the website, check and see if the website has been added
-var createWebsite = function(url, callback) {
-  Website.create({url: url}, (err, website) => {
+var createWebsite = function(website, callback) {
+  // save to db
+  Website.create(website, (err, website) => {
     if(err) {
       callback(err, null);
-    } else {
-      callback(null, website);
+    } else {      
+      callback(null, website);      
     }
   });
 }

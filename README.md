@@ -13,5 +13,11 @@ Add endpoints
 Add validation, uniqueness constraint to models
 Add redirect to website reviews page
 
-## Tuesday
+## Wednessday
+Add boostrap
+Add parse the webpage
 
+## Thursday
+Add edit webpage
+Add auth
+convert all url to lower case before save

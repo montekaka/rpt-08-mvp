@@ -20,7 +20,7 @@ class App extends React.Component {
     return (
       <Router>        
         <span>
-          <Navbar path="*"></Navbar>
+          <Route exact path="*" component={Navbar} ></Route>
           <main role="main">
             <Route exact path="/" component={Websites} ></Route>
             <Route path="/websites/:_id" component={Website} />               

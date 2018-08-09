@@ -15,12 +15,16 @@ var scrape = function(url, callback) {
 var promiseScrape = function(url){
 	return new Promise((resovle, reject) => {
 		request(url, (error, response, html) => {
-			if(!error) {
+			//console.log(error,response)
+			if(!error && response.statusCode !== 429) {				
 				var $ = cheerio.load(html);
 				var title = $("title").text();
 				var data = {url: url, name: title}
 				resovle(data);
-			} else {
+			} if (response.statusCode === 429) {
+				var data = {url: url, name: url}
+				resovle(data);
+			}else {
 				reject(error);
 			}
 		})		

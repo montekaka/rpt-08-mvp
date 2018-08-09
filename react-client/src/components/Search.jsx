@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Redirect } from 'react-router-dom';
 import $ from 'jquery';
 
 class Search extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			website: '',
+			toWebsite: false,
+			websiteId: '',
 			searchKeyword: '' // for now we are accepting only URL e.g. https://www.dropbox.com
 		};
 		this.handleChange = this.handleChange.bind(this);
@@ -20,6 +22,7 @@ class Search extends React.Component {
 	handleSubmit(event) {
 		var url = this.state.searchKeyword;
 		event.preventDefault();
+		var handleSubmitted = this.props.handleSubmitted;
 		$.ajax({
 			type: 'POST',
 			url: '/api/websites/new',
@@ -27,9 +30,15 @@ class Search extends React.Component {
 			data: JSON.stringify({url: url}),
 			contentType: 'application/json',  
 			success: (data) => {
-				console.log('success set the website', data)				
+				var data = JSON.parse(data);
+				this.setState({searchKeyword: ''});
+				this.setState({websiteId: data.websiteId});
+				this.setState({toWebsite: true});
+				var redirectUrl = '/websites/'+data.websiteId;	
+				handleSubmitted(redirectUrl);
 				//var website = JSON.parse(data).website;
 			}, error: (err) => {
+				this.setState({toWebsite: false});
 				console.log('err', err);
 			}			
 		})

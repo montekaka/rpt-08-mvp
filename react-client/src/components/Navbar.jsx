@@ -6,6 +6,12 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 class Navbar extends React.Component {
   constructor(props){
     super(props);
+    this.handleSubmitted = this.handleSubmitted.bind(this);
+  }
+
+  handleSubmitted(url) {
+    //console.log(url);
+    this.props.history.push(url)
   }
 
   render(){
@@ -15,11 +21,10 @@ class Navbar extends React.Component {
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
-
         <div className="collapse navbar-collapse" id="navbarsExampleDefault">
           <ul className="navbar-nav mr-auto">
           </ul>
-          <Search></Search>
+          <Search handleSubmitted= {this.handleSubmitted}></Search>
         </div>
       </nav>
     )
