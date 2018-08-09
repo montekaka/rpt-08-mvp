@@ -1,4 +1,6 @@
 var mongoose = require('mongoose');
+var bcrypt = require('bcrypt');
+
 var promise = mongoose.connect('mongodb://localhost/yelpsaas', {
   useMongoClient: true
 });
@@ -47,25 +49,37 @@ var reviewSchema = mongoose.Schema({
   updatedDate: Date
 });
 
-var userSchema = mongoose.Schema({
-  username: {type: String, unique: true, required: true, trim: true}
-  // email: {type: String, unique: true, required: true, trim: true},
-  // password: {type: String, required: true},
-  // passwordConf: {type: String, required: true}
-});
+// var userSchema = mongoose.Schema({
+//   username: {type: String, unique: true, required: true, trim: true},
+//   email: {type: String, unique: true, required: true, trim: true},
+//   password: {type: String, required: true}
+// });
 
 
-userSchema.post('save', (error, doc, next) => {
-  if(error.name === 'MongoError' && error.code === 11000) {
-    next(new Error('There was a duplicate key error'));
-  } else {
-    next(error);
-  }
-});
+// userSchema.post('save', (error, doc, next) => {
+//   if(error.name === 'MongoError' && error.code === 11000) {
+//     next(new Error('There was a duplicate key error'));
+//   } else {
+//     next(error);
+//   }
+// });
+
+// //before save
+// userSchema.pre('save', (next) => {
+//   var user = this;
+//   console.log(user);
+//   bcrypt.hash(user.password, 10, (err, hash) => {
+//     if(err) {
+//       return next(err);
+//     }
+//     user.password = hash;
+//     next();
+//   });
+// })
 
 var Website = mongoose.model('Website', websiteSchema);
 var Review = mongoose.model('Review', reviewSchema);
-var User = mongoose.model('User', userSchema);
+//var User = mongoose.model('User', userSchema);
 
 var selectAll = function(callback) {
   Website.find({}, function(err, websites) {
@@ -128,16 +142,16 @@ var getWebsiteReviews = function(websiteId, callback) {
   })
 }
 
-var createUser = function(user, callback) {
-  User.create(user, (err, user) => {    
-    if(err) {
-      // callback(err, null);
-      callback(err, null);
-    } else {
-      callback(null, user);
-    }
-  });
-}
+// var createUser = function(user, callback) {
+//   User.create(user, (err, user) => {    
+//     if(err) {
+//       // callback(err, null);
+//       callback(err, null);
+//     } else {
+//       callback(null, user);
+//     }
+//   });
+// }
 
 module.exports.selectAll = selectAll;
 module.exports.createWebsite = createWebsite;
@@ -145,4 +159,4 @@ module.exports.findWebsite = findWebsite;
 module.exports.createReview = createReview;
 module.exports.getWebsiteReviews = getWebsiteReviews;
 module.exports.findWebsiteByURL = findWebsiteByURL;
-module.exports.createUser = createUser;
+//module.exports.createUser = createUser;
