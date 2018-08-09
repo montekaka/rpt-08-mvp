@@ -19,19 +19,17 @@ class Website extends React.Component {
 		//this.setState({_id: _id});
 	}
 
-	setPage(id, callback) {
+	setPage(id, callback){
+		var baseUrl = '/api/websites/'+id+'.json';
 		$.ajax({
-			type: 'POST',
-			url: '/api/website.json',
-			dataType: 'text',
-			data: JSON.stringify({_id: id}),
-			contentType: 'application/json',
+			url: baseUrl,
 			success: (data) => {
-				callback(JSON.parse(data))
+				//callback(JSON.parse(data))
+				callback(data);
 			}, error: (err) => {
 				console.log('err', err)
-			}
-		})
+			}			
+		});
 	}
 
 	render() {

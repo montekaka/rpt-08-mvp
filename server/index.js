@@ -61,7 +61,7 @@ app.get('/websites/:websiteId', (req, res) => {
 })
 
 
-app.get('/websites/:websiteId.json', (req, res) => {
+app.get('/api/websites/:websiteId.json', (req, res) => {
   var _id = req.params.websiteId;
   db.findWebsite(_id, (err, website) => {
     if(err) {
