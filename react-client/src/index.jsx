@@ -6,7 +6,6 @@ import $ from 'jquery';
 import List from './components/List.jsx';
 import Navbar from './components/Navbar.jsx'
 import Websites from './components/Websites.jsx';
-import Search from './components/Search.jsx';
 import Website from './components/Website.jsx';
 
 class App extends React.Component {
@@ -21,10 +20,11 @@ class App extends React.Component {
     return (
       <Router>        
         <span>
-          <Navbar></Navbar>
-          <Route exact path="/" component={Search} ></Route>
-          <Route exact path="/" component={Websites} ></Route>
-          <Route path="/websites/:_id" component={Website} />     
+          <Navbar path="*"></Navbar>
+          <main role="main">
+            <Route exact path="/" component={Websites} ></Route>
+            <Route path="/websites/:_id" component={Website} />               
+          </main>
         </span>        
       </Router>
 )

@@ -27,20 +27,18 @@ class Search extends React.Component {
 			data: JSON.stringify({url: url}),
 			contentType: 'application/json',  
 			success: (data) => {
-				var website = JSON.parse(data).website;
-				this.props.history.push('/websites/'+website._id);
+				console.log('success set the website', data)				
+				//var website = JSON.parse(data).website;
 			}, error: (err) => {
 				console.log('err', err);
 			}			
 		})
 	}
-
 	render(){
 		return (
-			<form onSubmit={this.handleSubmit}>
-				<label>Search Product</label>
-				<input type="text" value={this.state.searchKeyword} onChange={this.handleChange} />											
-				<input type="submit" value="Submit" />
+			<form onSubmit={this.handleSubmit} className="form-inline my-2 my-lg-0">
+				<input className="form-control mr-sm-2" type="text" value={this.state.searchKeyword} onChange={this.handleChange} />											
+				<button type="submit" className="btn btn-outline-success my-2 my-sm-0">Search</button>
 			</form>
 		)
 	}

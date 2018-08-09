@@ -23,7 +23,7 @@ app.get('/api/websites.json', function (req, res) {
     }
   });
 });
-
+//http://localhost:3000/websites/5b6b9681be6ff340c81ea1ff
 app.post('/api/websites/new', function(req, res) {
 	//TODO search the db for the query website
 	// create a new one if can't find any match
@@ -34,15 +34,43 @@ app.post('/api/websites/new', function(req, res) {
     } else if (website === null) {      
       db.createWebsite(url, (err, website)=>{
         if(err){
-          res.send({error: err.message})
+          res.send({error: err.message});
         }
-        res.send({website: website});
+        //res.send({website: website});
+        console.log('start redirect the new page', '/websites/'+website._id)
+        res.redirect('/websites/'+website._id);
       })       
     } else {
-      res.send({website: website});
+      console.log('start redirect to page', '/websites/'+website._id)
+      res.status(200)
+      res.redirect('/websites/'+website._id);
     }
   });
 });
+
+
+app.get('/websites/:websiteId', (req, res) => {
+  var _id = req.params.websiteId;
+  db.findWebsite(_id, (err, website) => {
+    if(err) {
+      res.sendStatus(500);
+    }
+    //res.sendStatus(300);
+    res.send(req.params);
+  });  
+})
+
+
+app.get('/websites/:websiteId.json', (req, res) => {
+  var _id = req.params.websiteId;
+  db.findWebsite(_id, (err, website) => {
+    if(err) {
+      res.sendStatus(500);
+    }
+    //res.sendStatus(300);
+    res.send({website: website});
+  });  
+})
 
 // TODO change this one to use para get
 app.post('/api/website.json', function(req, res) {
