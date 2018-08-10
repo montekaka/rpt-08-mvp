@@ -106,6 +106,11 @@ var createWebsite = function(website, callback) {
   });
 }
 
+var updateWebsite = function(website, callback) {
+  console.log('update website', website);
+  Website.update({_id: website._id}, {$set: website}, callback);
+}
+
 var findWebsiteByURL = function(url, callback) {
   Website.findOne({url: url}, (err, website) => {
     if(err) {
@@ -125,6 +130,8 @@ var findWebsite = function(id, callback) {
     }
   });
 }
+
+
 
 var createReview = function(review, callback) {
   Review.create(review, (err, review) => {
@@ -161,6 +168,7 @@ module.exports.selectAll = selectAll;
 module.exports.createWebsite = createWebsite;
 module.exports.findWebsite = findWebsite;
 module.exports.createReview = createReview;
+module.exports.updateWebsite = updateWebsite;
 module.exports.getWebsiteReviews = getWebsiteReviews;
 module.exports.findWebsiteByURL = findWebsiteByURL;
 //module.exports.createUser = createUser;
