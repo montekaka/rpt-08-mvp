@@ -51,6 +51,11 @@ app.post('/api/websites/new', function(req, res) {
   });
 });
 
+app.post('/api/website/edit', function(req, res) {
+  var website = req.body.website;
+  
+})
+
 
 app.get('/websites/:websiteId', (req, res) => {
   var _id = req.params.websiteId;

@@ -12,8 +12,6 @@ class Website extends React.Component {
 			website: '',
 			editUrl: ''
 		}
-
-		this.handleEdit = this.handleEdit.bind(this);
 	}
 
 	componentDidMount() {
@@ -47,10 +45,6 @@ class Website extends React.Component {
 				console.log('err', err)
 			}			
 		});
-	}
-
-	handleEdit(){
-
 	}
 
 	render() {
