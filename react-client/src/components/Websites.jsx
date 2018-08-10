@@ -36,7 +36,7 @@ class Websites extends React.Component {
 					</div>
 				</div>							
 				<div className="container">
-					<div className="row">
+					<div className="card-columns">
 						{
 							this.state.websites.map( website => <WebsiteItem website={website} key={'website'+website._id}></WebsiteItem>)
 						}		

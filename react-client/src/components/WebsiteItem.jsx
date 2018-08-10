@@ -15,10 +15,13 @@ class WebsiteItem extends React.Component {
 
 	render() {
 		return (
-			<div className="col-md-4">
-				<h2>{this.state.website.name}</h2>
-				<p>{this.state.website.description}</p>
-				<Link to={this.state.linkTo} className="btn btn-secondary">Reviews</Link>	
+			<div className="card">
+				<img className="card-img-top" src={this.state.website.imageUrl} />
+				<div className="card-body">
+					<h5 className="card-title">{this.state.website.name}</h5>
+					 <p className="card-text">{this.state.website.description}</p>
+					 <Link to={this.state.linkTo} className="btn btn-primary">Reviews</Link>	
+				</div>				
 			</div>
 		)
 	}

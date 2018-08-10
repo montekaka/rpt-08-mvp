@@ -19,4 +19,6 @@ Add parse the webpage
 
 ## Thursday
 Add edit webpage
-convert all url to lower case before save
+
+## Friday
+Add calcualte rating from reviews

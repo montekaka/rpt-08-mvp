@@ -53,6 +53,7 @@ class Website extends React.Component {
 	      <div className="jumbotron">
 					<div className="container">
 						<h1 className="display-3">{this.state.website.name}</h1>
+						<p>{this.state.website.description}</p>
 						<p>TOTAL REVIEWS</p>
 						<p>STARS</p>
 						<Link to={this.state.editUrl}>Edit</Link>
