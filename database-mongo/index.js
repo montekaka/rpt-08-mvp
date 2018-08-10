@@ -108,7 +108,13 @@ var createWebsite = function(website, callback) {
 
 var updateWebsite = function(website, callback) {
   console.log('update website', website);
-  Website.update({_id: website._id}, {$set: website}, callback);
+  Website.update({_id: website._id}, {$set: website}, (err, website) => {
+    if(err) {
+      callback(err, null); 
+    } else {
+      callback(null, website); 
+    }
+  });
 }
 
 var findWebsiteByURL = function(url, callback) {

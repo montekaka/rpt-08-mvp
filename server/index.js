@@ -53,7 +53,13 @@ app.post('/api/websites/new', function(req, res) {
 
 app.post('/api/website/edit', function(req, res) {
   var website = req.body.website;
-  
+  db.updateWebsite(website, (err, website) => {
+    if(err){
+      res.send({error: err.message});
+    } else {
+      res.send({success: website});
+    }
+  })
 })
 
 

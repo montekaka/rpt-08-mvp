@@ -11,7 +11,7 @@ class Navbar extends React.Component {
 
   handleSubmitted(url) {
     //console.log(url);
-    this.props.history.push(url)
+    this.props.history.push(url);
   }
 
   render(){

@@ -9,7 +9,7 @@ class WebsiteEdit extends React.Component {
 		this.state = {
 			website: '',
 			websiteId: '',
-			linkTo: '',
+			redirectUrl: '',
 			url:'',
 			imageUrl:'',
 			name: '',
@@ -52,6 +52,8 @@ class WebsiteEdit extends React.Component {
 	}
 
 	setPage(id, callback) {
+		var redirectUrl = '/websites/'+id;
+		this.setState({redirectUrl: redirectUrl});
 		var baseUrl = '/api/websites/'+id+'.json';
 		$.ajax({
 			url: baseUrl,
@@ -70,6 +72,7 @@ class WebsiteEdit extends React.Component {
 		this.state.website.name = this.state.name;
 		this.state.website.description = this.state.description;
 		var website = this.state.website;
+		var redirectUrl = this.state.redirectUrl;
 		//console.log(website);
 		$.ajax({
 			type: 'POST',
@@ -80,6 +83,7 @@ class WebsiteEdit extends React.Component {
 			success: (data) => {
 				console.log('success', data);
 				//handleNewReview(data);
+				this.props.history.push(redirectUrl);
 			},
 			error: (err) => {
 				console.log('err', err);
