@@ -19,5 +19,4 @@ Add parse the webpage
 
 ## Thursday
 Add edit webpage
-Add auth
 convert all url to lower case before save

@@ -2,17 +2,24 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import Reviews from './reviews.jsx';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
 class Website extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			website: ''
+			websiteId: '',
+			website: '',
+			editUrl: ''
 		}
+
+		this.handleEdit = this.handleEdit.bind(this);
 	}
 
 	componentDidMount() {
 		var _id = this.props.match.params._id;
+		this.setState({websiteId: _id});
+		this.setState({editUrl: '/website/'+_id+'/edit'});
 		this.setPage(_id, (data) => {
 			this.setState(data);
 		});
@@ -21,6 +28,8 @@ class Website extends React.Component {
 
 	componentWillReceiveProps(newProps) {
 		var _id = newProps.match.params._id;
+		this.setState({websiteId: _id});
+		this.setState({editUrl: '/website/'+_id+'/edit'});
 		this.setPage(_id, (data) => {
 			this.setState(data);
 		});		
@@ -40,6 +49,10 @@ class Website extends React.Component {
 		});
 	}
 
+	handleEdit(){
+
+	}
+
 	render() {
 		return (
 			<span>
@@ -48,6 +61,7 @@ class Website extends React.Component {
 						<h1 className="display-3">{this.state.website.name}</h1>
 						<p>TOTAL REVIEWS</p>
 						<p>STARS</p>
+						<Link to={this.state.editUrl}>Edit</Link>
 					</div>
 	      </div>			
 				<Reviews website={this.state.website}></Reviews>

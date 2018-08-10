@@ -27,6 +27,8 @@ var websiteSchema = mongoose.Schema({
   imageUrl: String,
   name: String,
   rating: Number,
+  countReviews: Number,
+  totalScore: Number,
   description: String,
   reviews: [{ type: Schema.Types.ObjectId, ref: 'Review' }]
 });

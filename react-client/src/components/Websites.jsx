@@ -32,7 +32,7 @@ class Websites extends React.Component {
 					<div className="container">
 						<h1 className="display-3">Hello, world!</h1>
 						<p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-						<p>Total reviews {this.state.websites.length}</p>
+						<p>Total reviews {this.state.websites.length}</p>						
 					</div>
 				</div>							
 				<div className="container">
