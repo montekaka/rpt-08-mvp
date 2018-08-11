@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
+import StarRatings from 'react-star-ratings';
 
 class ReviewNew extends React.Component {
 	constructor(props){
@@ -30,8 +31,8 @@ class ReviewNew extends React.Component {
 		this.setState({screenname: event.target.value});
 	}	
 
-	handleRatingChange(event){
-		this.setState({rating: event.target.value});
+	handleRatingChange(newRating, name){
+		this.setState({rating: newRating});
 	}	
 
 	handleSubmit(event){
@@ -65,8 +66,15 @@ class ReviewNew extends React.Component {
 						<input type="text" className="form-control" value= {this.state.screenname} onChange={this.handleUserNameChange} />							
 					</div>
 					<div className="form-group">
-					 	<label>Stars</label>
-						<input type="number" className="form-control" value= {this.state.rating} onChange={this.handleRatingChange} />
+						<StarRatings numberOfStars={5} 
+							name="rating" 
+							starRatedColor='rgb(230, 67, 47)' 
+							starDimension="20px" 
+							starSpacing="1px"
+							rating={this.state.rating}
+							changeRating={this.handleRatingChange}
+						>
+						</StarRatings>
 					</div>	
 					<div className="form-group">
 					 	<label>Review</label>
