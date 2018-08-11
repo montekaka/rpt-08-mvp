@@ -26,9 +26,9 @@ var websiteSchema = mongoose.Schema({
   url: {type: String, unique: true},
   imageUrl: String,
   name: String,
-  rating: Number,
-  countReviews: Number,
-  totalScore: Number,
+  rating: {type: Number, default: 0},
+  countReviews: {type: Number, default: 0},
+  totalScore: {type: Number, default: 0},
   description: String,
   reviews: [{ type: Schema.Types.ObjectId, ref: 'Review' }]
 });
@@ -107,7 +107,6 @@ var createWebsite = function(website, callback) {
 }
 
 var updateWebsite = function(website, callback) {
-  console.log('update website', website);
   Website.update({_id: website._id}, {$set: website}, (err, website) => {
     if(err) {
       callback(err, null); 
@@ -136,8 +135,6 @@ var findWebsite = function(id, callback) {
     }
   });
 }
-
-
 
 var createReview = function(review, callback) {
   Review.create(review, (err, review) => {
