@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import Reviews from './reviews.jsx';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import StarRatings from 'react-star-ratings';
+
 
 class Website extends React.Component {
 	constructor(props){
@@ -77,8 +79,13 @@ class Website extends React.Component {
 						<h1 className="display-3">{this.state.website.name}</h1>
 						<p>{this.state.website.description}</p>
 						<p>Total reviews: {this.state.website.countReviews}</p>
-						<p>Average rating: {this.state.rating.toFixed(2)}</p>
-						<Link to={this.state.editUrl}>Edit</Link>
+						<div>
+							<p>Average rating: {this.state.rating.toFixed(2)}</p>
+							<StarRatings numberOfStars={5} name = 'rating' starDimension="20px" starSpacing="1px" rating = {this.state.rating} starRatedColor="rgb(230, 67, 47)"></StarRatings>
+						</div>						
+						<div>
+							<Link to={this.state.editUrl}>Edit</Link>
+						</div>
 					</div>
 	      </div>			
 				<Reviews website={this.state.website} updateWebsiteRating={this.updateWebsiteRating}></Reviews>
