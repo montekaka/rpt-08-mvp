@@ -30,7 +30,8 @@ var websiteSchema = mongoose.Schema({
   countReviews: {type: Number, default: 0},
   totalScore: {type: Number, default: 0},
   description: String,
-  reviews: [{ type: Schema.Types.ObjectId, ref: 'Review' }]
+  reviews: [{ type: Schema.Types.ObjectId, ref: 'Review' }],
+  createdDate: {type: Date, default: Date.now}
 });
 
 websiteSchema.post('save', (error, doc, next) => {
@@ -48,8 +49,7 @@ var reviewSchema = mongoose.Schema({
   screenname: String,
   upvote: Number,
   downvote: Number,
-  createdDate: Date,
-  updatedDate: Date
+  createdDate: {type: Date, default: Date.now}
 });
 
 // var userSchema = mongoose.Schema({
