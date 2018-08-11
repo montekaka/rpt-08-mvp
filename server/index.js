@@ -104,7 +104,17 @@ app.post('/api/reviews/new', (req, res) => {
     if(err) {
       res.sendStatus(500);
     }
-    res.send({review: review});
+    // find website // callback hell? change to promoise 
+    var reviewRating = review.rating;
+    var websiteId = review.website;   
+    db.findWebsite(websiteId, (err, website) => {
+      website.countReviews += 1;
+      website.totalScore += reviewRating;
+      db.updateWebsite(website, (err, websiteUpdateStatus) => {
+        //console.log(website);
+        res.send({review: review, website: website});
+      })
+    });    
   })
 });
 
