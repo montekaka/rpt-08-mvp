@@ -62,6 +62,11 @@ class Website extends React.Component {
 
 	updateWebsiteRating(website){
 		this.setState({website: website});
+		var rating = 0;
+		if( this.state.website.countReviews > 0) {
+			rating = this.state.website.totalScore / this.state.website.countReviews;
+		}
+		this.setState({rating: rating});		
 	}
 
 	render() {

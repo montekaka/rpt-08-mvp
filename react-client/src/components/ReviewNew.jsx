@@ -47,6 +47,7 @@ class ReviewNew extends React.Component {
 			contentType: 'application/json', 
 			success: (data) => {
 				handleNewReview(data);
+				this.setState({text: '', screenname: '', rating: 0});
 			},
 			error: (err) => {
 				console.log('err', err);
