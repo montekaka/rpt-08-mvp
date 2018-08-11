@@ -25,7 +25,6 @@ class Reviews extends React.Component {
 			data: JSON.stringify({websiteId: nextProps.website._id}),
 			contentType: 'application/json',  
 			success: (data) => {
-				console.log('success', JSON.parse(data));
 				this.setState({reviews: JSON.parse(data)});
 			}, error: (err) => {
 				console.log('err', err);
@@ -36,7 +35,9 @@ class Reviews extends React.Component {
 	handleNewReview(review) {		
 		var reviews = this.state.reviews;
 		reviews.unshift(JSON.parse(review).review);
+		var website = JSON.parse(review).website;
 		this.setState({reviews: reviews});
+		this.props.updateWebsiteRating(website);
 	}
 
 	render() {

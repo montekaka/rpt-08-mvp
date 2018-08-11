@@ -10,8 +10,11 @@ class Website extends React.Component {
 		this.state = {
 			websiteId: '',
 			website: '',
-			editUrl: ''
+			editUrl: '',
+			rating: 0
 		}
+
+		this.updateWebsiteRating = this.updateWebsiteRating.bind(this);
 	}
 
 	componentDidMount() {
@@ -20,6 +23,12 @@ class Website extends React.Component {
 		this.setState({editUrl: '/website/'+_id+'/edit'});
 		this.setPage(_id, (data) => {
 			this.setState(data);
+			var rating = 0;
+			if( this.state.website.countReviews > 0) {
+				rating = this.state.website.totalScore / this.state.website.countReviews;
+			}
+			console.log(rating);
+			this.setState({rating: rating});
 		});
 		//this.setState({_id: _id});
 	}
@@ -30,6 +39,11 @@ class Website extends React.Component {
 		this.setState({editUrl: '/website/'+_id+'/edit'});
 		this.setPage(_id, (data) => {
 			this.setState(data);
+			var rating = 0;
+			if( this.state.website.countReviews > 0) {
+				rating = this.state.website.totalScore / this.state.website.countReviews;
+			}
+			this.setState({rating: rating});			
 		});		
 	}
 
@@ -39,12 +53,15 @@ class Website extends React.Component {
 			url: baseUrl,
 			success: (data) => {
 				//callback(JSON.parse(data))
-				console.log(data)
 				callback(data);
 			}, error: (err) => {
 				console.log('err', err)
 			}			
 		});
+	}
+
+	updateWebsiteRating(website){
+		this.setState({website: website});
 	}
 
 	render() {
@@ -54,12 +71,12 @@ class Website extends React.Component {
 					<div className="container">
 						<h1 className="display-3">{this.state.website.name}</h1>
 						<p>{this.state.website.description}</p>
-						<p>TOTAL REVIEWS</p>
-						<p>STARS</p>
+						<p>Total reviews: {this.state.website.countReviews}</p>
+						<p>Average rating: {this.state.rating.toFixed(2)}</p>
 						<Link to={this.state.editUrl}>Edit</Link>
 					</div>
 	      </div>			
-				<Reviews website={this.state.website}></Reviews>
+				<Reviews website={this.state.website} updateWebsiteRating={this.updateWebsiteRating}></Reviews>
 			</span>
 		)
 	}

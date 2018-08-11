@@ -46,7 +46,6 @@ class ReviewNew extends React.Component {
 			data: JSON.stringify({review: review}),
 			contentType: 'application/json', 
 			success: (data) => {
-				console.log('success', data);
 				handleNewReview(data);
 			},
 			error: (err) => {
